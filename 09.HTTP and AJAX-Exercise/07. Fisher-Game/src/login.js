@@ -25,16 +25,16 @@ function login() {
             console.log('You are logged in!');
             isLogedIn = true;
             if (isLogedIn) {
+                // •	Keep the user data in the browser's session or locale storage. 
+                // •	Redirect to the home page.
+                sessionStorage.setItem('userToken', data.accessToken);
+                sessionStorage.setItem('userId', data._id);
+                sessionStorage.setItem('email', data.email);
+                
                 window.location.href = 'index.html';
             }
-            
         }
-
-
-
     }
-
-    
 }
 
 
