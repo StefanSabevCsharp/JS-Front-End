@@ -42,21 +42,29 @@ async function loadWeather() {
     addWeatherBtn.disabled = true;
     editWeatherBtn.disabled = false;
     const url = baseUrl + city._id;
+    let newLocation = locationFieldElement.value;
+    let newTemperature = degreesFieldElement.value;
+    let newDate = dateFieldElement.value;
 
     editWeatherBtn.addEventListener("click", () => {
 
-       fetch(url + city._id, {
+       fetch(url, {
             method: 'PUT',
             body: JSON.stringify({
-                location: locationFieldElement.value,
-                temperature: degreesFieldElement.value,
-                date: dateFieldElement.value,
+                location: newLocation,
+                temperature: newTemperature,
+                date: newDate,
                 _id: city._id
             })
             
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log("success");
+            addWeatherBtn.disabled = false
+            editWeatherBtn.disabled = true
+        }
+        )
         .catch(error => console.log(error));
         
         loadWeather();
